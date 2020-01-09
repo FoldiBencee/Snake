@@ -13,6 +13,7 @@ public class Main3Activity extends AppCompatActivity {
 
     private Button buttonRegisztralok,buttonVissza;
     private EditText editTextfelhasznev, editTextjelszo;
+    private adatbazissegito adatbseg;
 
 
     @Override
@@ -33,7 +34,7 @@ public class Main3Activity extends AppCompatActivity {
         buttonRegisztralok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //adatRogzites();
+                adatRogzites();
 
                 finish();
             }
@@ -47,21 +48,22 @@ public class Main3Activity extends AppCompatActivity {
         editTextfelhasznev = findViewById(R.id.idedittxtfelhnev);
         editTextjelszo = findViewById(R.id.idedittxtjelszo);
         buttonVissza = findViewById(R.id.idbttnVissza);
+        adatbseg = new adatbazissegito(this);
     }
 
 
-   /* public  void adatRogzites()
+    public  void adatRogzites()
     {
         String jelszo = editTextjelszo.getText().toString();
         String felhasznalonev = editTextfelhasznev.getText().toString();
 
-        Boolean eredmeny = adatbazissegito.adatRogzites(felhasznalonev,felhasznalonev);
+        Boolean eredmeny = adatbseg.adatRogzites(felhasznalonev,jelszo);
         if (eredmeny)
             Toast.makeText(this, "Adatrogzites sikeres", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "Adatrogzites sikertelen", Toast.LENGTH_SHORT).show();
 
     }
-*/
+
     //regisztraciosfelulet
 }
