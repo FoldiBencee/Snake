@@ -10,10 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Main3Activity extends AppCompatActivity {
-
+            adatbazissegito snake;
     private Button buttonRegisztralok,buttonVissza;
-    private EditText editTextfelhasznev, editTextjelszo;
+    private EditText editTextfelhasznev, editTextjelszo,editTextjelszoismet, editTextemail;
     private adatbazissegito adatbseg;
+
 
 
     @Override
@@ -47,8 +48,11 @@ public class Main3Activity extends AppCompatActivity {
         buttonRegisztralok = findViewById(R.id.idbttnRegisztralok);
         editTextfelhasznev = findViewById(R.id.idedittxtfelhnev);
         editTextjelszo = findViewById(R.id.idedittxtjelszo);
+        editTextemail = findViewById(R.id.idedittxtemail);
         buttonVissza = findViewById(R.id.idbttnVissza);
+        editTextjelszoismet = findViewById(R.id.idedittxtjelszoismet);
         adatbseg = new adatbazissegito(this);
+
     }
 
 
@@ -56,10 +60,13 @@ public class Main3Activity extends AppCompatActivity {
     {
         String jelszo = editTextjelszo.getText().toString();
         String felhasznalonev = editTextfelhasznev.getText().toString();
+        String email = editTextemail.getText().toString();
 
-        Boolean eredmeny = adatbseg.adatRogzites(felhasznalonev,jelszo);
+        String jelszoismet = editTextjelszoismet.getText().toString();
+        Boolean eredmeny = adatbseg.adatRogzites(felhasznalonev,jelszo,jelszoismet,email);
         if (eredmeny)
             Toast.makeText(this, "Adatrogzites sikeres", Toast.LENGTH_SHORT).show();
+
         else
             Toast.makeText(this, "Adatrogzites sikertelen", Toast.LENGTH_SHORT).show();
 

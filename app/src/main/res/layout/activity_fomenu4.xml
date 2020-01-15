@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/hatter"
     tools:context=".fomenu4Activity">
 
 
@@ -19,7 +20,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/idbttnBelepek"
+        android:id="@+id/idbttnBolt"
         android:background="#FFCC65"
         android:text="bolt"
         />
@@ -30,9 +31,6 @@
         android:background="#FFCC65"
         android:text="kilepes"
         />
-
-
-
 
 
 

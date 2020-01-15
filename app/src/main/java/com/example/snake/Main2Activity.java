@@ -28,6 +28,17 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+
+        buttonBelepek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent fomenube_lepes = new Intent(Main2Activity.this,fomenu4Activity.class);
+                startActivity(fomenube_lepes);
+                finish();
+            }
+        });
+
     }
 
     public  void init()

@@ -28,14 +28,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         buttonregisztracio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent regisztacios_oldalra = new Intent(MainActivity.this,Main3Activity.class);
-                startActivity(regisztacios_oldalra);
+                Intent regisztracios_oldalra = new Intent(MainActivity.this,Main3Activity.class);
+                startActivity(regisztracios_oldalra);
                 finish();
             }
+
         });
+
 
 
     }

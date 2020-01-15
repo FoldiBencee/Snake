@@ -4,24 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/hatter"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
+    <TextView
+        android:layout_width="168dp"
+        android:layout_height="70dp"
+        android:background="@drawable/snakefelirat"
+
+        />
+
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/idbttnBelepes"
-        android:background="#FFCC65"
-        android:text="Belepes"
+        android:layout_width="187dp"
+        android:layout_height="59dp"
+
+        android:background="@drawable/belepesgombika"
+
         />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/idbttnRegisztracio"
-        android:background="#FFCC65"
-        android:text="Regisztracio"
-        />
+        android:layout_width="187dp"
+        android:layout_height="59dp"
+        android:background="@drawable/reggombika" />
+
 
     //kezdokepernyo
 

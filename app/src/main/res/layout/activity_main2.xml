@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
+    android:background="@drawable/hatter"
     tools:context=".Main2Activity">
 
     <EditText
@@ -12,7 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/idedittxtfelhnev"
 
-        android:text="felhasznalonev"
+        android:hint="felhasznalonev"
         />
 
     <EditText
@@ -20,23 +22,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/idedittxtjelszo"
 
-        android:text="jelszo"
+        android:hint="jelszo"
         />
 
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="59dp"
         android:id="@+id/idbttnBelepek"
-        android:background="#FFCC65"
-        android:text="Belepek"
+        android:background="@drawable/belepekgomb"
+
         />
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="59dp"
         android:id="@+id/idbttnVissza"
-        android:background="#FFCC65"
-        android:text="vissza"
+        android:background="@drawable/visszagomb"
+
         />
 
 //belepesiadatokmegadasa
