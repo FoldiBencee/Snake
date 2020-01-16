@@ -5,41 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:background="@drawable/hatter"
-    tools:context=".fomenu4Activity">
+    tools:context="fomenu4Activity">
 
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="59dp"
         android:id="@+id/idbttnJatekInditas"
-        android:background="#FFCC65"
-        android:text="jatek inditasa"
+        android:background="@drawable/jind"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="20dp"
         />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="59dp"
         android:id="@+id/idbttnBolt"
-        android:background="#FFCC65"
-        android:text="bolt"
+        android:background="@drawable/bolt"
+        android:layout_marginBottom="20dp"
         />
+
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="59dp"
         android:id="@+id/idbttnKilepes"
-        android:background="#FFCC65"
-        android:text="kilepes"
+        android:background="@drawable/kilepesgomb"
+        android:layout_marginBottom="20dp"
         />
 
 
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="59dp"
         android:id="@+id/idbttnKilelentkezes"
-        android:background="#FFCC65"
-        android:text="Kijelentkezes"
+        android:background="@drawable/kijelentkezesgomb"
+        android:layout_marginBottom="20dp"
         />
 
 

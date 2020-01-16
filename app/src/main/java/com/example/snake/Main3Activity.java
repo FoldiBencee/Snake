@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Main3Activity extends AppCompatActivity {
-            adatbazissegito snake;
+
     private Button buttonRegisztralok,buttonVissza;
     private EditText editTextfelhasznev, editTextjelszo,editTextjelszoismet, editTextemail;
-    private adatbazissegito adatbseg;
+    private Adatbazissegito adatbseg;
 
 
 
@@ -37,7 +37,7 @@ public class Main3Activity extends AppCompatActivity {
             public void onClick(View view) {
                 adatRogzites();
 
-                finish();
+
             }
         });
 
@@ -51,7 +51,7 @@ public class Main3Activity extends AppCompatActivity {
         editTextemail = findViewById(R.id.idedittxtemail);
         buttonVissza = findViewById(R.id.idbttnVissza);
         editTextjelszoismet = findViewById(R.id.idedittxtjelszoismet);
-        adatbseg = new adatbazissegito(this);
+        adatbseg = new Adatbazissegito(this);
 
     }
 
@@ -62,10 +62,22 @@ public class Main3Activity extends AppCompatActivity {
         String felhasznalonev = editTextfelhasznev.getText().toString();
         String email = editTextemail.getText().toString();
 
+        if(adatbseg.checkFelhasznalonevEsEmail(felhasznalonev,email))
+        {
+            Toast.makeText(this, "Felhasználónév vagy az email foglalt", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
         String jelszoismet = editTextjelszoismet.getText().toString();
         Boolean eredmeny = adatbseg.adatRogzites(felhasznalonev,jelszo,jelszoismet,email);
-        if (eredmeny)
+        if (eredmeny) {
             Toast.makeText(this, "Adatrogzites sikeres", Toast.LENGTH_SHORT).show();
+            Intent kezdolap = new Intent(Main3Activity.this, MainActivity.class);
+            startActivity(kezdolap);
+            finish();
+        }
 
         else
             Toast.makeText(this, "Adatrogzites sikertelen", Toast.LENGTH_SHORT).show();

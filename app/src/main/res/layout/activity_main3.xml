@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/hatter"
+    android:gravity="center_horizontal"
     tools:context=".Main3Activity">
 
 
@@ -49,7 +50,7 @@
         android:layout_height="59dp"
         android:id="@+id/idbttnRegisztralok"
         android:background="@drawable/regisztralokgomb"
-
+        android:layout_marginBottom="20dp"
         />
 
     <Button

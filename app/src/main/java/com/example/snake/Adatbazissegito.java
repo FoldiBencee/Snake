@@ -6,9 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class adatbazissegito extends SQLiteOpenHelper {
-    public static  final String DATABASE_NAME ="snake";
-    public static  final String TABLE_NAME ="registrationee";
+public class Adatbazissegito extends SQLiteOpenHelper {
+    public static  final String DATABASE_NAME ="db";
+    public static  final String TABLE_NAME = "user";
 
 
     public  static  final String COL_1 = "ID";
@@ -16,12 +16,12 @@ public class adatbazissegito extends SQLiteOpenHelper {
     public  static  final String COL_3 = "jelszo";
     public  static  final String COL_4 = "jelszoismet";
     public  static  final String COL_5 = "email";
-    //public  static  final String COL_5 = "teljesnev";
+    //public  static  final String COL_6 = "teljesnev";
 
 
 
 
-    public adatbazissegito(Context context)
+    public Adatbazissegito(Context context)
     {
         super(context,DATABASE_NAME, null,1);
     }
@@ -37,6 +37,7 @@ public class adatbazissegito extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(sqLiteDatabase);
     }
 
     public boolean adatRogzites(String felhasznalonev, String jelszo, String jelszoismet, String email)
@@ -67,7 +68,24 @@ public class adatbazissegito extends SQLiteOpenHelper {
 
     }
 
+    public boolean checkFelhasznalonevEsEmail(String felhasznalonev ,String email)
+    {
+      SQLiteDatabase database = this.getReadableDatabase();
+      Cursor cursor = database.rawQuery("Select * from "+ TABLE_NAME +" where felhasznalonev=? or email=?", new String[]{felhasznalonev,email});
+      if (cursor.getCount()>0)
+          return  true;
+      else  return false;
+    }
 
+    public  boolean checkfelhasznalonevpassword(String felhasznalonev, String jelszo)
+    {
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery("Select * from "+ TABLE_NAME +" where felhasznalonev=? and jelszo=?",new String[]{felhasznalonev,jelszo});
+        if (cursor.getCount()>0)
+            return  true;
+        else  return false;
+
+    }
 
 
 

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         buttonbelepes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent belepes_oldalra = new Intent(MainActivity.this,Main2Activity.class);
                 startActivity(belepes_oldalra);
                 finish();
