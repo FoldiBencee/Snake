@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class Main2Activity extends AppCompatActivity {
     private Button buttonBelepek, buttonVissza;
     private EditText editTextfelhasznalonev, editTextjelszo;
@@ -37,6 +39,7 @@ public class Main2Activity extends AppCompatActivity {
                 String jelszo = editTextjelszo.getText().toString();
                 String felhasznalonev = editTextfelhasznalonev.getText().toString();
                 boolean asd = dbh.checkfelhasznalonevpassword(felhasznalonev,jelszo);
+                //boolean jojelszo = BCrypt.checkpw(jelszo, asd);
                 if (asd == true)
                 {
                     Toast.makeText(getApplicationContext(),"Sikeres belépés", Toast.LENGTH_SHORT).show();

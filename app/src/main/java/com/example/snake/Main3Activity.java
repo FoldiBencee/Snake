@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class Main3Activity extends AppCompatActivity {
 
     private Button buttonRegisztralok,buttonVissza;
@@ -35,7 +37,10 @@ public class Main3Activity extends AppCompatActivity {
         buttonRegisztralok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(Main3Activity.this,Main2Activity.class);
+                startActivity(i);
                 adatRogzites();
+                finish();
 
 
             }
@@ -61,6 +66,7 @@ public class Main3Activity extends AppCompatActivity {
         String jelszo = editTextjelszo.getText().toString();
         String felhasznalonev = editTextfelhasznev.getText().toString();
         String email = editTextemail.getText().toString();
+        String jelszoismet = editTextjelszoismet.getText().toString();
 
         if(adatbseg.checkFelhasznalonevEsEmail(felhasznalonev,email))
         {
@@ -69,8 +75,8 @@ public class Main3Activity extends AppCompatActivity {
         }
 
 
+        String hash = BCrypt.hashpw(jelszo, BCrypt.gensalt());
 
-        String jelszoismet = editTextjelszoismet.getText().toString();
         Boolean eredmeny = adatbseg.adatRogzites(felhasznalonev,jelszo,jelszoismet,email);
         if (eredmeny) {
             Toast.makeText(this, "Adatrogzites sikeres", Toast.LENGTH_SHORT).show();
