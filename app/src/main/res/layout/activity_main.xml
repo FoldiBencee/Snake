@@ -33,6 +33,14 @@
         android:layout_height="59dp"
         android:background="@drawable/reggombika" />
 
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="59dp"
+        android:text="Játék vendégként"
+        android:id="@+id/txtvendeg"
+
+        />
+
 
     //kezdokepernyo
 
