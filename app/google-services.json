@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "262142794935",
+    "firebase_url": "https://snek-37ed4.firebaseio.com",
+    "project_id": "snek-37ed4",
+    "storage_bucket": "snek-37ed4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262142794935:android:f837e8ad844e5f60324132",
+        "android_client_info": {
+          "package_name": "com.example.snake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262142794935-vu5i2ig3cohr90dkcda40mfmu9t6dind.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.snake",
+            "certificate_hash": "f984a304218a3ade810f12496c64eb7495f85796"
+          }
+        },
+        {
+          "client_id": "262142794935-a3fe8perd5e31q1uhovpbitf99u4evok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm8BINdTxKTlO4Yntzry4DuqGsFJR4TcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262142794935-a3fe8perd5e31q1uhovpbitf99u4evok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
