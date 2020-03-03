@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".JatekActivity"
     android:id="@+id/frameLayout"
-    android:background="#F000"
+    android:gravity="center_horizontal"
     >
+
+   <!--
+   <Button
+       android:layout_marginBottom="20dp"
+       android:layout_width="150dp"
+       android:layout_height="59dp"
+       android:layout_marginLeft="100dp"
+       android:layout_marginTop="500dp"
+       android:id="@+id/idbttnfel"
+       android:text="fel"/>
+   -->
+
+
    </FrameLayout>

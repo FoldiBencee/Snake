@@ -1,5 +1,6 @@
 package com.example.snake;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 public class Main3Activity extends AppCompatActivity {
@@ -16,7 +28,11 @@ public class Main3Activity extends AppCompatActivity {
     private Button buttonRegisztralok,buttonVissza;
     private EditText editTextfelhasznev, editTextjelszo,editTextjelszoismet, editTextemail;
     private Adatbazissegito adatbseg;
-
+    private felhasznalok felhasznalok;
+    private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
+    private String email, password;
+    private long maxid;
 
 
     @Override
@@ -39,8 +55,8 @@ public class Main3Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(Main3Activity.this,Main2Activity.class);
                 startActivity(i);
-                adatRogzites();
-                finish();
+                //adatRogzites();
+                adatrogzitesFirebaseba();
 
 
             }
@@ -57,6 +73,22 @@ public class Main3Activity extends AppCompatActivity {
         buttonVissza = findViewById(R.id.idbttnVissza);
         editTextjelszoismet = findViewById(R.id.idedittxtjelszoismet);
         adatbseg = new Adatbazissegito(this);
+        felhasznalok = new felhasznalok();
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("felhasznaloadatok");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists())
+                    maxid = dataSnapshot.getChildrenCount();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -90,5 +122,60 @@ public class Main3Activity extends AppCompatActivity {
 
     }
 
+    public  void adatrogzitesFirebaseba()
+    {
+        if(editTextfelhasznev.getText().toString().isEmpty() ||
+                editTextjelszo.getText().toString().isEmpty() ||
+                editTextjelszoismet.getText().toString().isEmpty() ||
+                editTextemail.getText().toString().isEmpty()
+        )
+        {
+            Toast.makeText(Main3Activity.this, "Minden mezot ki kell tolteni", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            email = editTextemail.getText().toString();
+            password = editTextjelszo.getText().toString();
+            //felhasznalok.setFelhasznalonev(editTextfelhasznev.getText().toString());
+            //felhasznalok.setEmail(editTextemail.getText().toString());
+            //felhasznalok.setJelszo(editTextjelszo.getText().toString());
+            //felhasznalok.setPont(0);
+            //databaseReference.child(String.valueOf(mAuth.getUid())).setValue(felhasznalok);
+            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful())
+                    {
+                        FirebaseUser firebaseUser=mAuth.getCurrentUser();
+
+
+                        firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(Main3Activity.this, "Sikeres", Toast.LENGTH_SHORT).show();
+                                Intent sikeres = new Intent(Main3Activity.this, Main2Activity.class);
+                                startActivity(sikeres);
+                                finish();
+
+                            }
+
+                        });
+                    }
+
+
+
+                    else
+                    {
+                        Toast.makeText(Main3Activity.this, "Sikertelen", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+
+        }
+    }
+    }
+
+
     //regisztraciosfelulet
-}
+

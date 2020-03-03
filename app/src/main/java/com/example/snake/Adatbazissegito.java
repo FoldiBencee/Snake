@@ -77,10 +77,10 @@ public class Adatbazissegito extends SQLiteOpenHelper {
       else  return false;
     }
 
-    public  boolean checkfelhasznalonevpassword(String felhasznalonev, String jelszo)
+    public  boolean checkemailpassword(String felhasznalonev, String jelszo)
     {
         SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cursor = database.rawQuery("Select * from "+ TABLE_NAME +" where felhasznalonev=? and jelszo=?",new String[]{felhasznalonev,jelszo});
+        Cursor cursor = database.rawQuery("Select * from "+ TABLE_NAME +" where email=? and jelszo=?",new String[]{felhasznalonev,jelszo});
         if (cursor.getCount()>0)
             return  true;
         else  return false;

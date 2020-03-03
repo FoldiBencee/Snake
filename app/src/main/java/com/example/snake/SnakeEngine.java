@@ -15,14 +15,12 @@ import android.graphics.Paint;
 import android.content.res.AssetFileDescriptor;
 
 import android.view.SurfaceView;
+import android.widget.Button;
 
 public class SnakeEngine extends SurfaceView implements Runnable {
 
+    Button idbuttnfel;
     private Thread thread = null;
-    float jobb;
-    float bal;
-    float fel;
-    float le;
 
     private Canvas canvas;
     private SurfaceHolder surfaceHolder;
@@ -45,6 +43,17 @@ public class SnakeEngine extends SurfaceView implements Runnable {
 
     private int kajaX;
     private int kajaY;
+
+    private int falX;
+    private int falY;
+    private int fal1X;
+    private int fal1Y;
+    private int elet =0;
+
+    private int eletX;
+    private int eletY;
+
+    private int kigyospeed;
 
 
     private int blockSize;
@@ -116,17 +125,38 @@ public class SnakeEngine extends SurfaceView implements Runnable {
 
 
 
-
     public void ujJatek() {
-
+        elet =1;
         snakeHossz = 1;
         snakeXs[0] = NUM_BLOCKS_WIDE / 2;
         snakeYs[0] = numBlocksHigh / 2;
 
-
+        randomfalakspawnolas();
+        eletspawnolas();
         kajaspawnolas();
         elertpont = 0;
+
         nextFrameTime = System.currentTimeMillis();
+    }
+
+    public void randomfalakspawnolas()
+    {
+        Random r = new Random();
+        falX = r.nextInt(NUM_BLOCKS_WIDE -1)+1;
+        falY = r.nextInt(numBlocksHigh -1)+1;
+
+        fal1X = r.nextInt(NUM_BLOCKS_WIDE -1)+1;
+        fal1Y = r.nextInt(numBlocksHigh -1)+1;
+
+    }
+
+
+    public void eletspawnolas()
+    {
+        Random r = new Random();
+        eletX = r.nextInt(NUM_BLOCKS_WIDE -1)+1;
+        eletY = r.nextInt(numBlocksHigh -1)+1;
+
     }
 
 
@@ -141,12 +171,23 @@ public class SnakeEngine extends SurfaceView implements Runnable {
     private void eat(){
 
         snakeHossz++;
-
+        randomfalakspawnolas();
         kajaspawnolas();
-
+        //eletspawnolas();
         elertpont = elertpont + 1;
 
     }
+    private void eleteat()
+    {
+        eletspawnolas();
+        randomfalakspawnolas();
+
+    }
+    private void kigyogyorsitas()
+    {
+
+    }
+
 
 
 
@@ -186,22 +227,23 @@ public class SnakeEngine extends SurfaceView implements Runnable {
 
     private boolean halal(){
 
-        boolean halal = false;
+        boolean kigyohalal = false;
 
         //falhozeres
-        if (snakeXs[0] == -1) halal = true;
-        if (snakeXs[0] >= NUM_BLOCKS_WIDE) halal = true;
-        if (snakeYs[0] == -1) halal = true;
-        if (snakeYs[0] == numBlocksHigh) halal = true;
+        if (snakeXs[0] == -1) kigyohalal =true;
+        if (snakeXs[0] >= NUM_BLOCKS_WIDE) kigyohalal = true;
+        if (snakeYs[0] == -1 )kigyohalal=true;
+        if (snakeYs[0] == numBlocksHigh ) kigyohalal = true;
+
 
         //magabaharap
         for (int i = snakeHossz - 1; i > 0; i--) {
             if ((i > 4) && (snakeXs[0] == snakeXs[i]) && (snakeYs[0] == snakeYs[i])) {
-                halal = true;
+                kigyohalal = true;
             }
         }
 
-        return halal;
+        return kigyohalal;
     }
 
 
@@ -209,9 +251,34 @@ public class SnakeEngine extends SurfaceView implements Runnable {
 //eszikakigyo
         if (snakeXs[0] == kajaX && snakeYs[0] == kajaY) {
             eat();
+            //kigyogyorsitas();
+
         }
 
         kigyomozgatas();
+
+        //meghal a kigyo a random falba
+        if (snakeXs[0] == falX && snakeYs[0] == falY)
+        {
+            elet--;
+        }
+        //meghal a kigyo a random1 falba
+        if (snakeXs[0] == fal1X && snakeYs[0] == fal1Y)
+        {
+            elet--;
+        }
+        //eletet szerez a kigyo
+        if (snakeXs[0] == eletX && snakeYs[0] == eletY)
+        {
+            eleteat();
+            elet = elet+1;
+        }
+
+
+        if (elet == 0)
+        {
+            ujJatek();
+        }
 
         if (halal()) {
             ujJatek();
@@ -234,6 +301,10 @@ public class SnakeEngine extends SurfaceView implements Runnable {
             paint.setTextSize(90);
             canvas.drawText("Pont: " + elertpont, 10, 70, paint);
 
+            //eletkiiras
+            paint.setTextSize(90);
+            canvas.drawText("Elet:: " + elet, 10, 140, paint);
+
 //kigyorajz
             for (int i = 0; i < snakeHossz; i++) {
                 canvas.drawRect(snakeXs[i] * blockSize,
@@ -247,11 +318,25 @@ public class SnakeEngine extends SurfaceView implements Runnable {
             paint.setColor(Color.argb(255, 255, 0, 0));
 
 
+
             canvas.drawRect(kajaX * blockSize,
                     (kajaY * blockSize),
                     (kajaX * blockSize) + blockSize,
                     (kajaY * blockSize) + blockSize,
                     paint);
+
+
+
+            //meghalos random fal
+            paint.setColor(Color.argb(255,100,100,20));
+            canvas.drawRect(falX*blockSize,(falY*blockSize),(falX*blockSize) + blockSize,(falY * blockSize) +blockSize,paint);
+
+            //meghalos random fal1
+            canvas.drawRect(fal1X*blockSize,(fal1Y*blockSize),(fal1X*blockSize) + blockSize,(fal1Y * blockSize) +blockSize,paint);
+
+//eletkocka hozzaadasa.
+            paint.setColor(Color.argb(255,230,0,255));
+            canvas.drawRect(eletX*blockSize,(eletY*blockSize),(eletX*blockSize) + blockSize,(eletY * blockSize) +blockSize,paint);
 
 
             surfaceHolder.unlockCanvasAndPost(canvas);

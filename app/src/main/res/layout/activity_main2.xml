@@ -12,16 +12,16 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/idedittxtfelhnev"
-
-        android:hint="felhasznalonev"
+        android:id="@+id/idedittxtemail"
+        android:inputType="textEmailAddress"
+        android:hint="email"
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/idedittxtjelszo"
-
+        android:inputType="textPassword"
         android:hint="jelszo"
         />
 
