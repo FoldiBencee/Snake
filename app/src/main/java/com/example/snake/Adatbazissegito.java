@@ -16,7 +16,7 @@ public class Adatbazissegito extends SQLiteOpenHelper {
     public  static  final String COL_3 = "jelszo";
     public  static  final String COL_4 = "jelszoismet";
     public  static  final String COL_5 = "email";
-    //public  static  final String COL_6 = "teljesnev";
+    public  static  final String COL_6 = "pontok";
 
 
 
@@ -48,7 +48,7 @@ public class Adatbazissegito extends SQLiteOpenHelper {
         contentValues.put(COL_3,jelszo);
         contentValues.put(COL_4,jelszoismet);
         contentValues.put(COL_5,email);
-
+       // contentValues.put(COL_6,pontok);
 
 
 
@@ -86,6 +86,7 @@ public class Adatbazissegito extends SQLiteOpenHelper {
         else  return false;
 
     }
+
 
 
 

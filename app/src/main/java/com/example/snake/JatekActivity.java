@@ -1,14 +1,24 @@
 package com.example.snake;
 
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.Display;
 import android.graphics.Point;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class JatekActivity extends AppCompatActivity {
     SnakeEngine snakeEngine;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +36,10 @@ public class JatekActivity extends AppCompatActivity {
         frameLayout.addView(snakeEngine);
         frameLayout.invalidate();
 
+
+
     }
+
 
     @Override
     protected void onResume() {
@@ -39,5 +52,6 @@ public class JatekActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         snakeEngine.pause();
+
     }
 }

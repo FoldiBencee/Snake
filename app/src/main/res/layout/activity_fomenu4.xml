@@ -22,8 +22,8 @@
     <Button
         android:layout_width="187dp"
         android:layout_height="59dp"
-        android:id="@+id/idbttnBolt"
-        android:background="@drawable/bolt"
+        android:id="@+id/idbttnTopPont"
+        android:background="@drawable/pontlista"
         android:layout_marginBottom="20dp"
         />
 
@@ -44,6 +44,14 @@
         android:id="@+id/idbttnKilelentkezes"
         android:background="@drawable/kijelentkezesgomb"
         android:layout_marginBottom="20dp"
+        />
+
+
+    <ImageView
+        android:layout_width="187dp"
+        android:layout_height="59dp"
+        android:src="@drawable/mutegomb"
+        android:id="@+id/idmuteimageviev"
         />
 
 

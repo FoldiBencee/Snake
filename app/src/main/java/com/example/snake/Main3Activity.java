@@ -25,7 +25,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class Main3Activity extends AppCompatActivity {
 
-    private Button buttonRegisztralok,buttonVissza;
+    private Button buttonRegisztralok,buttonVissza,buttonofflineRegisztralok;
     private EditText editTextfelhasznev, editTextjelszo,editTextjelszoismet, editTextemail;
     private Adatbazissegito adatbseg;
     private felhasznalok felhasznalok;
@@ -61,6 +61,13 @@ public class Main3Activity extends AppCompatActivity {
 
             }
         });
+        buttonofflineRegisztralok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Main3Activity.this,Main2Activity.class);
+                adatRogzites();
+            }
+        });
 
     }
 
@@ -72,10 +79,11 @@ public class Main3Activity extends AppCompatActivity {
         editTextemail = findViewById(R.id.idedittxtemail);
         buttonVissza = findViewById(R.id.idbttnVissza);
         editTextjelszoismet = findViewById(R.id.idedittxtjelszoismet);
+        buttonofflineRegisztralok = findViewById(R.id.idbttnofflineRegisztralok);
         adatbseg = new Adatbazissegito(this);
         felhasznalok = new felhasznalok();
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("felhasznaloadatok");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("felhasznalok");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -134,40 +142,48 @@ public class Main3Activity extends AppCompatActivity {
         }
         else
         {
-            email = editTextemail.getText().toString();
-            password = editTextjelszo.getText().toString();
-            //felhasznalok.setFelhasznalonev(editTextfelhasznev.getText().toString());
+            felhasznalok.setFelhasznalonev(editTextfelhasznev.getText().toString());
+
             //felhasznalok.setEmail(editTextemail.getText().toString());
             //felhasznalok.setJelszo(editTextjelszo.getText().toString());
-            //felhasznalok.setPont(0);
-            //databaseReference.child(String.valueOf(mAuth.getUid())).setValue(felhasznalok);
-            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            felhasznalok.setPont(0);
+
+            mAuth.createUserWithEmailAndPassword(editTextemail.getText().toString(),editTextjelszo.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful())
                     {
-                        FirebaseUser firebaseUser=mAuth.getCurrentUser();
-
-
-                        firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        mAuth.signInWithEmailAndPassword(editTextemail.getText().toString(),editTextjelszo.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(Main3Activity.this, "Sikeres", Toast.LENGTH_SHORT).show();
-                                Intent sikeres = new Intent(Main3Activity.this, Main2Activity.class);
-                                startActivity(sikeres);
-                                finish();
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                FirebaseUser firebaseUser=mAuth.getCurrentUser();
+                                databaseReference.child(firebaseUser.getUid()).setValue(felhasznalok);
+                                if (!firebaseUser.isEmailVerified())
+                                {
+                                    firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(Main3Activity.this, "Sikeres", Toast.LENGTH_SHORT).show();
+                                            Intent sikeres = new Intent(Main3Activity.this, Main2Activity.class);
+                                            startActivity(sikeres);
+                                            finish();
 
+                                        }
+
+                                    });
+                                }
+                                else
+                                {
+                                    Toast.makeText(Main3Activity.this, "Sikertelen", Toast.LENGTH_SHORT).show();
+                                }
                             }
-
                         });
+
+
+
+
                     }
 
-
-
-                    else
-                    {
-                        Toast.makeText(Main3Activity.this, "Sikertelen", Toast.LENGTH_SHORT).show();
-                    }
                 }
             });
 

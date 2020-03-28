@@ -34,6 +34,16 @@
         android:layout_marginBottom="20dp"
 
         />
+//offlinebelepes
+    <Button
+        android:layout_width="187dp"
+        android:layout_height="59dp"
+        android:id="@+id/idbttnofflineBelepek"
+        android:background="@drawable/offlinebelepesgomb"
+        android:layout_marginBottom="20dp"
+
+        />
+
     <Button
         android:layout_width="187dp"
         android:layout_height="59dp"

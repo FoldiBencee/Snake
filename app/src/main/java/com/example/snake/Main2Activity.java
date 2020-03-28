@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class Main2Activity extends AppCompatActivity {
-    private Button buttonBelepek, buttonVissza;
+    private Button buttonBelepek, buttonVissza, buttonofflinebelepek;
     private EditText editTextemail, editTextjelszo;
     private Adatbazissegito dbh;
     private FirebaseAuth mAuth;
@@ -44,9 +44,9 @@ public class Main2Activity extends AppCompatActivity {
         buttonBelepek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String jelszo = editTextjelszo.getText().toString();
+              /*  String jelszo = editTextjelszo.getText().toString();
                 String email = editTextemail.getText().toString();
-                boolean asd = dbh.checkemailpassword(email,jelszo);//firebasenel kerdojel nem aradhat igy
+                boolean asd = dbh.checkemailpassword(email,jelszo);//firebasenel kerdojel nem aradhat igy megoldva
                 //boolean jojelszo = BCrypt.checkpw(jelszo, asd);
                 if (asd == true)
                 {
@@ -60,7 +60,29 @@ public class Main2Activity extends AppCompatActivity {
                     //= db.felhasznalonevpassword(felhasznalonev,jelszo);
                 }
 
+                sqlite belepes nem kell //Jatek vendegkent funkcio hozzaadva
+                */
                 firebasebelepes();
+            }
+        });
+        buttonofflinebelepek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                  String jelszo = editTextjelszo.getText().toString();
+                String email = editTextemail.getText().toString();
+                boolean asd = dbh.checkemailpassword(email,jelszo);
+                //boolean jojelszo = BCrypt.checkpw(jelszo, asd);
+                if (asd == true)
+                {
+                    Toast.makeText(getApplicationContext(),"Sikeres belépés", Toast.LENGTH_SHORT).show();
+                    Intent fomenube_lepes = new Intent(Main2Activity.this,fomenu4Activity.class);
+                    startActivity(fomenube_lepes);
+                    finish();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Sikertelen belépés", Toast.LENGTH_SHORT).show();
+                    //= db.felhasznalonevpassword(felhasznalonev,jelszo);
+                }
             }
         });
 
@@ -72,6 +94,7 @@ public class Main2Activity extends AppCompatActivity {
         editTextemail = findViewById(R.id.idedittxtemail);
         editTextjelszo = findViewById(R.id.idedittxtjelszo);
         buttonVissza = findViewById(R.id.idbttnVissza);
+        buttonofflinebelepek =findViewById(R.id.idbttnofflineBelepek);
         dbh = new Adatbazissegito(Main2Activity.this);
         mAuth = FirebaseAuth.getInstance();
 
@@ -120,6 +143,7 @@ public class Main2Activity extends AppCompatActivity {
         }
 
     }
+
 
     //belepesiadatokmegadasa
 
