@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
                 alertDialog.setTitle("Folytatás mint vendég");
-                alertDialog.setMessage("Ha biztosan vendégként szeretne játszani, akkor a pontszámaid nem lesznek elmentve, és nem lesz megjelenítve a globális ranglistán");
+                alertDialog.setMessage("Ha biztosan vendégként szeretne játszani, akkor a pontszámai nem lesznek elmentve, és nem lesz megjelenítve a globális ranglistán");
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

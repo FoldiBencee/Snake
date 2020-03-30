@@ -55,7 +55,6 @@ public class Main3Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(Main3Activity.this,Main2Activity.class);
                 startActivity(i);
-                //adatRogzites();
                 adatrogzitesFirebaseba();
 
 
@@ -108,6 +107,12 @@ public class Main3Activity extends AppCompatActivity {
         String email = editTextemail.getText().toString();
         String jelszoismet = editTextjelszoismet.getText().toString();
 
+        if (!adatbseg.checkjelszojelszoismet(jelszo,jelszoismet))
+        {
+            Toast.makeText(this, "A jelszó félre lett gépelve", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if(adatbseg.checkFelhasznalonevEsEmail(felhasznalonev,email))
         {
             Toast.makeText(this, "Felhasználónév vagy az email foglalt", Toast.LENGTH_SHORT).show();
@@ -118,7 +123,7 @@ public class Main3Activity extends AppCompatActivity {
         String hash = BCrypt.hashpw(jelszo, BCrypt.gensalt());
 
         Boolean eredmeny = adatbseg.adatRogzites(felhasznalonev,jelszo,jelszoismet,email);
-        if (eredmeny) {
+        if (eredmeny && adatbseg.checkjelszojelszoismet(jelszo,jelszoismet)&& adatbseg.checkFelhasznalonevEsEmail(felhasznalonev,email)) {
             Toast.makeText(this, "Adatrogzites sikeres", Toast.LENGTH_SHORT).show();
             Intent kezdolap = new Intent(Main3Activity.this, MainActivity.class);
             startActivity(kezdolap);
@@ -144,8 +149,7 @@ public class Main3Activity extends AppCompatActivity {
         {
             felhasznalok.setFelhasznalonev(editTextfelhasznev.getText().toString());
 
-            //felhasznalok.setEmail(editTextemail.getText().toString());
-            //felhasznalok.setJelszo(editTextjelszo.getText().toString());
+
             felhasznalok.setPont(0);
 
             mAuth.createUserWithEmailAndPassword(editTextemail.getText().toString(),editTextjelszo.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
