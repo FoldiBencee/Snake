@@ -102,4 +102,5 @@ public class Adatbazissegito extends SQLiteOpenHelper {
 
 
 
+
 }

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 public class fomenu4Activity extends AppCompatActivity {
     private Button buttonjatekinditas,buttonTopPont,buttonKijeletnkezes,buttonKilepes;
     MediaPlayer fomenuzene;
-private ImageView imageViewmute;
+ ImageView imageViewmute;
 
 
 

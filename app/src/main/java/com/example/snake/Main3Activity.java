@@ -107,31 +107,44 @@ public class Main3Activity extends AppCompatActivity {
         String email = editTextemail.getText().toString();
         String jelszoismet = editTextjelszoismet.getText().toString();
 
-        if (!adatbseg.checkjelszojelszoismet(jelszo,jelszoismet))
+        if (jelszo.isEmpty()|| felhasznalonev.isEmpty()||email.isEmpty()||jelszoismet.isEmpty())
         {
-            Toast.makeText(this, "A jelszó félre lett gépelve", Toast.LENGTH_SHORT).show();
-            return;
+            Toast.makeText(this, "Minden mezőt ki kell tölteni", Toast.LENGTH_SHORT).show();
         }
-
-        if(adatbseg.checkFelhasznalonevEsEmail(felhasznalonev,email))
-        {
-            Toast.makeText(this, "Felhasználónév vagy az email foglalt", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
-        String hash = BCrypt.hashpw(jelszo, BCrypt.gensalt());
-
-        Boolean eredmeny = adatbseg.adatRogzites(felhasznalonev,jelszo,jelszoismet,email);
-        if (eredmeny && adatbseg.checkjelszojelszoismet(jelszo,jelszoismet)&& adatbseg.checkFelhasznalonevEsEmail(felhasznalonev,email)) {
-            Toast.makeText(this, "Adatrogzites sikeres", Toast.LENGTH_SHORT).show();
-            Intent kezdolap = new Intent(Main3Activity.this, MainActivity.class);
-            startActivity(kezdolap);
-            finish();
-        }
-
         else
-            Toast.makeText(this, "Adatrogzites sikertelen", Toast.LENGTH_SHORT).show();
+        {
+
+            if (!adatbseg.checkjelszojelszoismet(jelszo,jelszoismet))
+            {
+                Toast.makeText(this, "A jelszó félre lett gépelve", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(adatbseg.checkFelhasznalonevEsEmail(felhasznalonev,email))
+            {
+                Toast.makeText(this, "Felhasználónév vagy az email foglalt", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+            String hash = BCrypt.hashpw(jelszo, BCrypt.gensalt());
+
+            Boolean eredmeny = adatbseg.adatRogzites(felhasznalonev,jelszo,jelszoismet,email);
+            if (eredmeny && adatbseg.checkjelszojelszoismet(jelszo,jelszoismet)&& adatbseg.checkFelhasznalonevEsEmail(felhasznalonev,email)) {
+                Toast.makeText(this, "Adatrogzites sikeres", Toast.LENGTH_SHORT).show();
+                Intent kezdolap = new Intent(Main3Activity.this, MainActivity.class);
+                startActivity(kezdolap);
+                finish();
+            }
+
+            else
+                Toast.makeText(this, "Adatrogzites sikertelen", Toast.LENGTH_SHORT).show();
+
+
+
+        }
+
+
 
     }
 
@@ -155,30 +168,29 @@ public class Main3Activity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(editTextemail.getText().toString(),editTextjelszo.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful())
-                    {
+
                         mAuth.signInWithEmailAndPassword(editTextemail.getText().toString(),editTextjelszo.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                FirebaseUser firebaseUser=mAuth.getCurrentUser();
-                                databaseReference.child(firebaseUser.getUid()).setValue(felhasznalok);
-                                if (!firebaseUser.isEmailVerified())
-                                {
-                                    firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(Main3Activity.this, "Sikeres", Toast.LENGTH_SHORT).show();
-                                            Intent sikeres = new Intent(Main3Activity.this, Main2Activity.class);
-                                            startActivity(sikeres);
-                                            finish();
+                                if (task.isSuccessful()) {
+                                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                    databaseReference.child(firebaseUser.getUid()).setValue(felhasznalok);
+                                    if (!firebaseUser.isEmailVerified()) {
+                                        firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(Main3Activity.this, "Sikeres", Toast.LENGTH_SHORT).show();
+                                                Intent sikeres = new Intent(Main3Activity.this, Main2Activity.class);
+                                                startActivity(sikeres);
+                                                finish();
+                                                mAuth.signOut();
 
-                                        }
+                                            }
 
-                                    });
-                                }
-                                else
-                                {
-                                    Toast.makeText(Main3Activity.this, "Sikertelen", Toast.LENGTH_SHORT).show();
+                                        });
+                                    } else {
+                                        Toast.makeText(Main3Activity.this, "Sikertelen", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         });
@@ -186,7 +198,7 @@ public class Main3Activity extends AppCompatActivity {
 
 
 
-                    }
+
 
                 }
             });

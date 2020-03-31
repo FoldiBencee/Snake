@@ -14,8 +14,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/idpontlista"
+        android:textSize="25dp"
+        android:text="\n"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/idpontlista2"
+        android:textSize="20dp"
+        android:text="Más felhasználók pontjai: \n"
 
         />
+
+
+
+    <Button
+        android:layout_width="187dp"
+        android:layout_height="59dp"
+        android:background="@drawable/visszagomb"
+        android:id="@+id/bttnvissza"
+        android:layout_marginBottom="20dp"
+        />
+
+    <ImageView
+        android:layout_width="187dp"
+        android:layout_height="59dp"
+        android:src="@drawable/mutegomb"
+        android:id="@+id/idmuteimageviev"
+        />
+
 
 
 </LinearLayout>

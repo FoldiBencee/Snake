@@ -25,15 +25,15 @@ public class ujrakezdesActivity extends AppCompatActivity {
 
    // FirebaseDatabase database = FirebaseDatabase.getInstance();
    // DatabaseReference myRef;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private String userid = mAuth.getCurrentUser().getUid();
+    //private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+   // private String userid = mAuth.getCurrentUser().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ujrakezdes);
         init();
-        firedb();
+
 
 
 
@@ -63,18 +63,7 @@ public class ujrakezdesActivity extends AppCompatActivity {
 
 
     }
-    public void firedb()
-    {
-        mAuth = FirebaseAuth.getInstance();
 
-
-    }
-
-    public void offlinepontszammentes()
-    {
-
-
-    }
 
 
 
